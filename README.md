@@ -1,1 +1,2 @@
-# community_detection_algorithms
+# Comunity Detection Algorithms
+
