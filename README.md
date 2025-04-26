@@ -1,2 +1,2 @@
-# Comunity Detection Algorithms
+# Transitive Closure Study
 
