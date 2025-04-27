@@ -2,37 +2,20 @@ import pandas as pd
 import os
 import argparse
 
-def consolidate_csv_files(folder_path):
-    """
-    Reads all .csv files from the specified folder and consolidates them into a single DataFrame.
-    """
-    all_files = []
-
-    # Loop through all files in the directory
-    for file in os.listdir(folder_path):
-        if file.endswith(".csv"):
-            file_path = os.path.join(folder_path, file)
-            df = pd.read_csv(file_path)
-            all_files.append(df)
-
-    consolidated_df = pd.concat(all_files, ignore_index=True)
-
-    return consolidated_df
-
 def main():
 
     # Set up argument parsing
     parser = argparse.ArgumentParser(description="perform cocitation analysis")
     parser.add_argument("first_gen_file", help="Path to the first generation citation, one csv")
-    parser.add_argument("second_gen_files", help="Path to the second generation citation, one folder")
+    parser.add_argument("second_gen_file", help="Path to the second generation citation, one csv")
     parser.add_argument("output_file", help="Path to the output file")
 
     args = parser.parse_args()
 
     df_1st = pd.read_csv(args.first_gen_file)
-    df_2nd = consolidate_csv_files(args.second_gen_files)
+    df_2nd = pd.read_csv(args.second_gen_file)
 
-    year_l = list(df_2nd['citing_pub_year'].unique())
+    year_l = list(df_2nd['citing_pub_year'].unique()) # collect all possible years from 2nd-gen citations
     year_l.sort()
 
     percent_l_1st = []
