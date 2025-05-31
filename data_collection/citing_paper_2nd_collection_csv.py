@@ -1,10 +1,12 @@
 import csv
 import os
+import argparse
 
-def search_2nd_gen_citation(oc_file_path, case_name, doi_file, output_folder_path):
+def search_2nd_gen_citation(oc_file_path, doi_file, output_folder_path):
 
     # read the doi file
     with open(doi_file, 'r', encoding='utf-8') as f:
+
         doi_l = []
         user_id_l = []
         doi_dict = dict()
@@ -38,12 +40,20 @@ def search_2nd_gen_citation(oc_file_path, case_name, doi_file, output_folder_pat
                         f.write(",".join(row) + '\n')
 
 def main():
-    oc_file_path = 'missing_citing_pub_year.csv'
-    case_name = 'abeta'
-    doi_file = f'{case_name}_to_process.csv'
-    output_folder_path = f'{case_name}_2nd_missing_pub_year'
 
-    search_2nd_gen_citation(oc_file_path, case_name, doi_file, output_folder_path)
+    # Set up argument parsing
+    parser = argparse.ArgumentParser(description="collect 2nd gen citations using CSV library")
+    parser.add_argument("doi_file", help="Path to the first generation citation, one csv")
+    parser.add_argument("oc_file_path", help="Path to the second generation citation, one csv")
+    parser.add_argument("output_folder_path", help="Path to the output file")
+
+    args = parser.parse_args()
+
+    oc_file_path = args.oc_file_path
+    doi_file = args.doi_file
+    output_folder_path = args.output_folder_path
+
+    search_2nd_gen_citation(oc_file_path, doi_file, output_folder_path)
 
 if __name__ == '__main__':
     main()
