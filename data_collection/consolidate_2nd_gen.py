@@ -28,8 +28,31 @@ def consolidate_csv_files(folder_path):
 
 def main():
     path_2nd = 'abeta/citation_2nd_gen'
-    outfile_path = "abeta_2nd.csv"
+    outfile_path = "my_data/consolidated/abeta_2nd.csv"
     citation_2nd = consolidate_csv_files(path_2nd)
+    citation_2nd_missing_pub_year = consolidate_csv_files("abeta/missing_pub_year")
+    citation_2nd = pd.concat([citation_2nd, citation_2nd_missing_pub_year], ignore_index=True)
+    citation_2nd.to_csv(outfile_path, index=False)
+
+    path_2nd = 'louvain/citation_2nd_gen'
+    outfile_path = "my_data/consolidated/louvain_2nd.csv"
+    citation_2nd = consolidate_csv_files(path_2nd)
+    citation_2nd_missing_pub_year = consolidate_csv_files("louvain/missing_pub_year")
+    citation_2nd = pd.concat([citation_2nd, citation_2nd_missing_pub_year], ignore_index=True)
+    citation_2nd.to_csv(outfile_path, index=False)
+
+    path_2nd = 'lp/citation_2nd_gen'
+    outfile_path = "my_data/consolidated/lp_2nd.csv"
+    citation_2nd = consolidate_csv_files(path_2nd)
+    citation_2nd_missing_pub_year = consolidate_csv_files("lp/missing_pub_year")
+    citation_2nd = pd.concat([citation_2nd, citation_2nd_missing_pub_year], ignore_index=True)
+    citation_2nd.to_csv(outfile_path, index=False)
+
+    path_2nd = 'gn/citation_2nd_gen'
+    outfile_path = "my_data/consolidated/gn_2nd.csv"
+    citation_2nd = consolidate_csv_files(path_2nd)
+    citation_2nd_missing_pub_year = consolidate_csv_files("gn/missing_pub_year")
+    citation_2nd = pd.concat([citation_2nd, citation_2nd_missing_pub_year], ignore_index=True)
     citation_2nd.to_csv(outfile_path, index=False)
 
 if __name__ == "__main__":
